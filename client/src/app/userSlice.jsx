@@ -62,6 +62,20 @@ export const loginUser = (email, password) => async (dispatch) => {
     }
 }
 
+export const registerThunk = (nickName, email, password) => async (dispatch) => {
+    try {
+
+        const url = `${ENV.API_URL}/${ENV.ENDPOINTS.AUTH.REGISTER}`;
+
+        await axios.post(url, { nickName, email, password }).then((res) => {
+            dispatch(setMessage(res.data.message))
+        })
+
+    } catch (error) {
+        console.log(error);
+    }
+}
+
 export const getAllUsers = () => async (dispatch) => {
     const token = localStorage.getItem("access")
     try {

@@ -3,11 +3,12 @@ import { User } from "../models/index.js";
 import { jwt } from "../utils/index.js";
 
 function register(req, res) {
-  const { nickname, email, password } = req.body;
+  const { nickName, email, password } = req.body;
+
 
   const user = new User({
     email: email.toLowerCase(),
-    nickname: nickname.toLowerCase(),
+    nickName: nickName.toLowerCase(),
   });
 
   const salt = bscrypt.genSaltSync(10);
@@ -19,7 +20,7 @@ function register(req, res) {
       console.log(error);
       res.status(400).send({ msg: "Error al registrar el usuario" });
     } else {
-      res.status(201).send(userStorage);
+      res.status(201).send({ message: "success" });
     }
   });
 }
